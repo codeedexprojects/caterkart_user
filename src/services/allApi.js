@@ -15,7 +15,35 @@ export const userLogin = async (reqBody) => {
 export const getWorkList = async () => {
     try {
         const token = localStorage.getItem('access_token');
-        const response = await axios.get(`${BASE_URL}${API_ENDPOINTS.PROFILE}/${id}`, {
+        const response = await axios.get(`${BASE_URL}${API_ENDPOINTS.WORK_LIST}/catering/published/`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getProfile = async () => {
+    try {
+        const token = localStorage.getItem('access_token');
+        const response = await axios.get(`${BASE_URL}${API_ENDPOINTS.USER_AUTH}/users/me/`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const updateProfile = async (reqBody) => {
+    try {
+        const token = localStorage.getItem('access_token');
+        const response = await axios.patch(`${BASE_URL}${API_ENDPOINTS.USER_AUTH}/staff/details/create/`,reqBody,{
             headers: {
                 Authorization: `Bearer ${token}`
             }
