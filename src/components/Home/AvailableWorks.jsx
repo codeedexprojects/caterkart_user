@@ -27,18 +27,20 @@ const AvailableWorkSection = ({ availableWork, handleRequestWork, handleCardClic
                   <h3 className="text-xl font-bold text-gray-800 mb-1">
                      {work.work_type}
                   </h3>
-                  <p className="text-gray-600 mb-1">
-                    <MapPin className="inline-block w-4 h-4 text-orange-500 mr-1" />
-                    {work.place}
-                  </p>
+                 <p className="text-gray-600 mb-1">
+  <MapPin className="inline-block w-4 h-4 text-orange-500 mr-1" />
+  <span className="font-semibold">{work.place}</span>
+</p>
+
                 </div>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div className="flex items-center gap-2 text-gray-600">
-                  <Calendar className="w-4 h-4 text-orange-500" />
-                  <span className="text-sm">{work.date}</span>
-                </div>
+  <Calendar className="w-4 h-4 text-orange-500" />
+  <span className="text-sm font-semibold">{work.date}</span>
+</div>
+
                 <div className="flex items-center gap-2 text-gray-600">
                   <Clock className="w-4 h-4 text-orange-500" />
                   <span className="text-sm">{work.time}</span>

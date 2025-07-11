@@ -43,7 +43,21 @@ export const getProfile = async () => {
 export const updateProfile = async (reqBody) => {
     try {
         const token = localStorage.getItem('access_token');
-        const response = await axios.patch(`${BASE_URL}${API_ENDPOINTS.USER_AUTH}/staff/details/create/`,reqBody,{
+        const response = await axios.patch(`${BASE_URL}${API_ENDPOINTS.USER_AUTH}/staff-details/`,reqBody,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const requestWork = async (reqBody) => {
+    try {
+        const token = localStorage.getItem('access_token');
+        const response = await axios.post(`${BASE_URL}${API_ENDPOINTS.USER_AUTH}/work-request/create/`,reqBody,{
             headers: {
                 Authorization: `Bearer ${token}`
             }
