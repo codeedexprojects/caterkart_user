@@ -7,6 +7,8 @@ import {
   ChefHat, 
   ArrowRight
 } from 'lucide-react';
+import { userLogin } from '../services/allApi';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -14,6 +16,9 @@ const Login = () => {
     email: '',
     password: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -23,14 +28,38 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your authentication logic here
-    console.log('Form submitted:', formData);
-  };
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      // ✅ Your API expects mobile_number instead of email
+      const reqBody = {
+        mobile_number: formData.email,
+        password: formData.password
+      };
+
+      const res = await userLogin(reqBody);
+
+      console.log('Login successful:', res);
+
+      if (res.tokens && res.tokens.access) {
+        localStorage.setItem('access_token', res.tokens.access);
+       navigate('/'); 
+      } else {
+        setError('Invalid response format.');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -62,20 +91,20 @@ const Login = () => {
           </div>
 
           {/* Login Form */}
-          <div className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Email Address
+                Mobile Number
               </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
-                  type="email"
+                  type="text"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
                   className="w-full border-2 border-gray-200 rounded-xl py-3 pl-12 pr-4 focus:border-orange-500 focus:outline-none transition-colors"
-                  placeholder="Enter your email"
+                  placeholder="Enter your mobile number"
                   required
                 />
               </div>
@@ -120,15 +149,23 @@ const Login = () => {
               </button>
             </div>
 
-            {/* Submit Button */}
+            {error && (
+              <p className="text-red-500 text-sm">{error}</p>
+            )}
+
             <button
-              onClick={handleSubmit}
+              type="submit"
+              disabled={loading}
               className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-orange-700 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 mt-6"
             >
-              Sign In
-              <ArrowRight className="w-5 h-5" />
+              {loading ? 'Signing In...' : (
+                <>
+                  Sign In
+                  <ArrowRight className="w-5 h-5" />
+                </>
+              )}
             </button>
-          </div>
+          </form>
 
           {/* Help Text */}
           <div className="text-center mt-6">
