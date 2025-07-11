@@ -18,6 +18,7 @@ import {
   Shirt
 } from 'lucide-react';
 import Header from '../components/common/Header';
+import Footer from '../components/common/Footer';
 
 const CateringStaffJobDetails = () => {
   const [isApplied, setIsApplied] = useState(false);
@@ -212,6 +213,7 @@ const CateringStaffJobDetails = () => {
             </div>
           </div>
         </div>
+        <Footer></Footer>
     </div>
   );
 };
