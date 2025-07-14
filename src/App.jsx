@@ -1,26 +1,59 @@
-import { useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import Home from './pages/Home'
-import Profile from './pages/Profile'
-import MyWorksPage from './pages/MyWorks'
-import CateringJobDetails from './pages/WorkDetails'
-import Login from './pages/Login'
+import { Route, Routes, Navigate } from 'react-router-dom';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import MyWorksPage from './pages/MyWorks';
+import CateringJobDetails from './pages/WorkDetails';
+import Login from './pages/Login';
 
 function App() {
+  const RequireAuth = ({ children }) => {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      return <Navigate to="/login" replace />;
+    }
+    return children;
+  };
 
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/my-works" element={<MyWorksPage />} />
-        <Route path="/work-details" element={<CateringJobDetails />} />
         <Route path="/login" element={<Login />} />
 
-
+        <Route
+          path="/"
+          element={
+            <RequireAuth>
+              <Home />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/my-works"
+          element={
+            <RequireAuth>
+              <MyWorksPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/work-details/:id"
+          element={
+            <RequireAuth>
+              <CateringJobDetails />
+            </RequireAuth>
+          }
+        />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

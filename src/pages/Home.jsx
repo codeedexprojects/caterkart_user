@@ -13,8 +13,6 @@ const CaterKartHomePage = () => {
   const navigate = useNavigate();
   const [availableWork, setAvailableWork] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedWorkId, setSelectedWorkId] = useState(null);
-  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const userProfile = {
     name: "John Smith",
@@ -69,30 +67,11 @@ const CaterKartHomePage = () => {
     fetchAvailableWork();
   }, []);
 
-  const handleRequestWork = (workId, e) => {
-    e.stopPropagation();
-    setSelectedWorkId(workId);
-    setShowConfirmation(true);
+  const handleRequestWork = () => {
+    
   };
 
-  const confirmRequest = async () => {
-    try {
-      const response = await requestWork({ work: selectedWorkId });
-      
-      if (response && response.data) {
-        toast.success("Work request submitted successfully!");
-        // Optionally update the UI or refetch data
-      } else {
-        toast.error("Failed to submit work request");
-      }
-    } catch (error) {
-      console.error("Error requesting work:", error);
-      toast.error("Error submitting work request");
-    } finally {
-      setShowConfirmation(false);
-      setSelectedWorkId(null);
-    }
-  };
+  
 
   const handleCardClick = (workId) => {
     navigate(`/work-details/${workId}`);
@@ -121,15 +100,7 @@ const CaterKartHomePage = () => {
       </div>
       <Footer />
 
-      <ConfirmationModal
-        isOpen={showConfirmation}
-        onClose={() => setShowConfirmation(false)}
-        onConfirm={confirmRequest}
-        title="Confirm Work Request"
-        message="Are you sure you want to request this work?"
-        confirmText="Request Work"
-        cancelText="Cancel"
-      />
+      
     </div>
   );
 };

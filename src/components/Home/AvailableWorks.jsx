@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Clock, Users, Calendar, ChefHat } from 'lucide-react';
+import { MapPin, Clock, Users, Calendar, ChefHat, Building } from 'lucide-react';
 
 const AvailableWorkSection = ({ availableWork, handleRequestWork, handleCardClick }) => {
   return (
@@ -25,25 +25,25 @@ const AvailableWorkSection = ({ availableWork, handleRequestWork, handleCardClic
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-1">
-                     {work.work_type}
+                   {work.date}
                   </h3>
-                 <p className="text-gray-600 mb-1">
-  <MapPin className="inline-block w-4 h-4 text-orange-500 mr-1" />
-  <span className="font-semibold">{work.place}</span>
-</p>
+                  <p className="text-gray-600 mb-1">
+                    <Building className="inline-block w-4 h-4 text-orange-500 mr-1" />
+                    <span className="font-semibold">{work.Auditorium_name}</span>
+                  </p>
 
                 </div>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
                 <div className="flex items-center gap-2 text-gray-600">
-  <Calendar className="w-4 h-4 text-orange-500" />
-  <span className="text-sm font-semibold">{work.date}</span>
-</div>
+                  <MapPin className="w-4 h-4 text-orange-500" />
+                  <span className="text-sm font-semibold">Place: {work.place}</span>
+                </div>
 
                 <div className="flex items-center gap-2 text-gray-600">
                   <Clock className="w-4 h-4 text-orange-500" />
-                  <span className="text-sm">{work.time}</span>
+                  <span className="text-sm"> Reporting Time: {work.reporting_time}</span>
                 </div>
                 <div className="flex items-center gap-2 text-gray-600">
                   <Users className="w-4 h-4 text-orange-500" />
@@ -54,7 +54,7 @@ const AvailableWorkSection = ({ availableWork, handleRequestWork, handleCardClic
                 <div className="flex items-center gap-2 text-gray-600">
                   <Users className="w-4 h-4 text-orange-500" />
                   <span className="text-sm">
-                    Attendees: {work.attendees}
+                    Wrok Type: {work.work_type}
                   </span>
                 </div>
               </div>

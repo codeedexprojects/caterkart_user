@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
+    identifier: '',
     password: ''
   });
   const [loading, setLoading] = useState(false);
@@ -38,9 +38,9 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // ✅ Your API expects mobile_number instead of email
+    
       const reqBody = {
-        mobile_number: formData.email,
+        identifier: formData.identifier,
         password: formData.password
       };
 
@@ -100,8 +100,8 @@ const Login = () => {
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
-                  name="email"
-                  value={formData.email}
+                  name="identifier"
+                  value={formData.identifier}
                   onChange={handleInputChange}
                   className="w-full border-2 border-gray-200 rounded-xl py-3 pl-12 pr-4 focus:border-orange-500 focus:outline-none transition-colors"
                   placeholder="Enter your mobile number"
