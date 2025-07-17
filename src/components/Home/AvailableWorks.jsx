@@ -25,7 +25,7 @@ const AvailableWorkSection = ({ availableWork, handleRequestWork, handleCardClic
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <h3 className="text-xl font-bold text-gray-800 mb-1">
-                   {work.date}
+                   {work.date} - {work.Auditorium_name}
                   </h3>
                   <p className="text-gray-600 mb-1">
                     <Building className="inline-block w-4 h-4 text-orange-500 mr-1" />
