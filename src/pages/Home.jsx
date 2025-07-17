@@ -71,8 +71,6 @@ const CaterKartHomePage = () => {
     
   };
 
-  
-
   const handleCardClick = (workId) => {
     navigate(`/work-details/${workId}`);
   };
@@ -95,7 +93,7 @@ const CaterKartHomePage = () => {
             />
           )}
 
-          <CompletedWorkSection recentCompletedWork={recentCompletedWork} />
+          {/* <CompletedWorkSection recentCompletedWork={recentCompletedWork} /> */}
         </div>
       </div>
       <Footer />
