@@ -79,10 +79,7 @@ const Header = () => {
                 />
                 <div className="text-left">
                   <p className="text-sm font-medium text-gray-800">{userProfile.name}</p>
-                  <div className="flex items-center">
-                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                    <span className="text-xs text-gray-500 ml-1">{userProfile.rating}</span>
-                  </div>
+                  
                 </div>
               </Link>
             </div>

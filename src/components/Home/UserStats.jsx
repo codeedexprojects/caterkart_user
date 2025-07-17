@@ -10,13 +10,7 @@ const UserStatsSection = ({ userProfile }) => {
             <h1 className="text-3xl font-bold mb-2">Welcome back, {userProfile.name}! 👋</h1>
             <p className="text-orange-100">Ready to serve amazing experiences today?</p>
           </div>
-          <div className="text-right">
-            <div className="flex items-center gap-2 mb-1">
-              <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-              <span className="text-xl font-bold">{userProfile.rating}</span>
-            </div>
-            <p className="text-orange-100 text-sm">Your Rating</p>
-          </div>
+          
         </div>
         
         <div className="grid grid-cols-3 gap-4">
