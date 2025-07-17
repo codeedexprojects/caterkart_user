@@ -37,9 +37,9 @@ const MyWorksPage = () => {
     fetchWorks();
   }, []);
 
-  const handleViewDetails = (workId) => {
-    navigate(`/work-details/${workId}`);
-  };
+  const handleViewDetails = (workDetailId) => {
+  navigate(`/work-details/${workDetailId}`);
+};
 
   // Group works by status
   const getWorksByStatus = () => {
@@ -186,12 +186,12 @@ const MyWorksPage = () => {
           </div>
           <div className="flex items-center gap-2">
             <button 
-              onClick={() => handleViewDetails(work.id)}
-              className="flex items-center gap-1 px-3 py-1 text-sm text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-colors"
-            >
-              <Eye className="w-4 h-4" />
-              View Details
-            </button>
+  onClick={() => handleViewDetails(work.work_detail.id)}
+  className="flex items-center gap-1 px-3 py-1 text-sm text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded-lg transition-colors"
+>
+  <Eye className="w-4 h-4" />
+  View Details
+</button>
             <button className="p-1 text-gray-400 hover:text-gray-600 rounded">
               <MoreHorizontal className="w-4 h-4" />
             </button>
