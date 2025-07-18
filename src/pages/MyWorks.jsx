@@ -274,69 +274,66 @@ const MyWorksPage = () => {
                     className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
                   />
                 </div>
-                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-                  <Filter className="w-4 h-4" />
-                  Filter
-                </button>
+                
               </div>
             </div>
           </div>
 
           {/* Stats Cards */}
           {/* Stats Cards - Modified for responsive layout */}
-<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-  {/* Total Works Card */}
-  <div className="bg-white rounded-xl shadow-lg p-4">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-xs md:text-sm text-gray-600">Total Works</p>
-        <p className="text-xl md:text-2xl font-bold text-gray-800">{workData.length}</p>
-      </div>
-      <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-        <ChefHat className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
-      </div>
-    </div>
-  </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {/* Total Works Card */}
+            <div className="bg-white rounded-xl shadow-lg p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs md:text-sm text-gray-600">Total Works</p>
+                  <p className="text-xl md:text-2xl font-bold text-gray-800">{workData.length}</p>
+                </div>
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <ChefHat className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+                </div>
+              </div>
+            </div>
 
-  {/* Pending Card */}
-  <div className="bg-white rounded-xl shadow-lg p-4">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-xs md:text-sm text-gray-600">Pending</p>
-        <p className="text-xl md:text-2xl font-bold text-yellow-600">{worksByStatus.pending.length}</p>
-      </div>
-      <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-        <AlertCircle className="w-5 h-5 md:w-6 md:h-6 text-yellow-600" />
-      </div>
-    </div>
-  </div>
+            {/* Pending Card */}
+            <div className="bg-white rounded-xl shadow-lg p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs md:text-sm text-gray-600">Pending</p>
+                  <p className="text-xl md:text-2xl font-bold text-yellow-600">{worksByStatus.pending.length}</p>
+                </div>
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <AlertCircle className="w-5 h-5 md:w-6 md:h-6 text-yellow-600" />
+                </div>
+              </div>
+            </div>
 
-  {/* Accepted Card */}
-  <div className="bg-white rounded-xl shadow-lg p-4">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-xs md:text-sm text-gray-600">Accepted</p>
-        <p className="text-xl md:text-2xl font-bold text-green-600">{worksByStatus.accepted.length}</p>
-      </div>
-      <div className="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center">
-        <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
-      </div>
-    </div>
-  </div>
+            {/* Accepted Card */}
+            <div className="bg-white rounded-xl shadow-lg p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs md:text-sm text-gray-600">Accepted</p>
+                  <p className="text-xl md:text-2xl font-bold text-green-600">{worksByStatus.accepted.length}</p>
+                </div>
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                  <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
+                </div>
+              </div>
+            </div>
 
-  {/* Rejected Card */}
-  <div className="bg-white rounded-xl shadow-lg p-4">
-    <div className="flex items-center justify-between">
-      <div>
-        <p className="text-xs md:text-sm text-gray-600">Rejected</p>
-        <p className="text-xl md:text-2xl font-bold text-red-600">{worksByStatus.rejected.length}</p>
-      </div>
-      <div className="w-10 h-10 md:w-12 md:h-12 bg-red-100 rounded-lg flex items-center justify-center">
-        <XCircle className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
-      </div>
-    </div>
-  </div>
-</div>
+            {/* Rejected Card */}
+            <div className="bg-white rounded-xl shadow-lg p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs md:text-sm text-gray-600">Rejected</p>
+                  <p className="text-xl md:text-2xl font-bold text-red-600">{worksByStatus.rejected.length}</p>
+                </div>
+                <div className="w-10 h-10 md:w-12 md:h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                  <XCircle className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
+                </div>
+              </div>
+            </div>
+          </div>
 
           {/* Tab Navigation */}
           <div className="bg-white rounded-xl shadow-lg mb-8">
