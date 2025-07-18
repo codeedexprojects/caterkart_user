@@ -178,7 +178,7 @@ const MyWorksPage = () => {
         <div className="flex items-center justify-between pt-4 border-t border-gray-100">
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${work.status === 'accepted' ? 'bg-green-500' :
-                work.status === 'rejected' ? 'bg-red-500' : 'bg-yellow-500'
+              work.status === 'rejected' ? 'bg-red-500' : 'bg-yellow-500'
               }`}></div>
             <span className="text-sm text-gray-600">
               Requested on {new Date(work.requested_at).toLocaleDateString()}
@@ -214,9 +214,14 @@ const MyWorksPage = () => {
       <div>
         <Header />
         <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-orange-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading your works...</p>
+          <div className="text-center space-y-4">
+            <div className="relative inline-block">
+              <div className="w-24 h-24 border-4 border-orange-200 rounded-full"></div>
+              <div className="absolute top-0 left-0 w-24 h-24 border-4 border-orange-600 border-t-transparent rounded-full animate-spin"></div>
+              <ChefHat className="w-8 h-8 text-orange-600 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" />
+            </div>
+            <p className="text-lg font-medium text-gray-700">Loading your works...</p>
+            <p className="text-sm text-gray-500">We're preparing everything for you</p>
           </div>
         </div>
         <Footer />
@@ -278,55 +283,60 @@ const MyWorksPage = () => {
           </div>
 
           {/* Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Total Works</p>
-                  <p className="text-2xl font-bold text-gray-800">{workData.length}</p>
-                </div>
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <ChefHat className="w-6 h-6 text-blue-600" />
-                </div>
-              </div>
-            </div>
+          {/* Stats Cards - Modified for responsive layout */}
+<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+  {/* Total Works Card */}
+  <div className="bg-white rounded-xl shadow-lg p-4">
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-xs md:text-sm text-gray-600">Total Works</p>
+        <p className="text-xl md:text-2xl font-bold text-gray-800">{workData.length}</p>
+      </div>
+      <div className="w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+        <ChefHat className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
+      </div>
+    </div>
+  </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Pending</p>
-                  <p className="text-2xl font-bold text-yellow-600">{worksByStatus.pending.length}</p>
-                </div>
-                <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                  <AlertCircle className="w-6 h-6 text-yellow-600" />
-                </div>
-              </div>
-            </div>
+  {/* Pending Card */}
+  <div className="bg-white rounded-xl shadow-lg p-4">
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-xs md:text-sm text-gray-600">Pending</p>
+        <p className="text-xl md:text-2xl font-bold text-yellow-600">{worksByStatus.pending.length}</p>
+      </div>
+      <div className="w-10 h-10 md:w-12 md:h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+        <AlertCircle className="w-5 h-5 md:w-6 md:h-6 text-yellow-600" />
+      </div>
+    </div>
+  </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Accepted</p>
-                  <p className="text-2xl font-bold text-green-600">{worksByStatus.accepted.length}</p>
-                </div>
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
-                </div>
-              </div>
-            </div>
+  {/* Accepted Card */}
+  <div className="bg-white rounded-xl shadow-lg p-4">
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-xs md:text-sm text-gray-600">Accepted</p>
+        <p className="text-xl md:text-2xl font-bold text-green-600">{worksByStatus.accepted.length}</p>
+      </div>
+      <div className="w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-lg flex items-center justify-center">
+        <CheckCircle className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
+      </div>
+    </div>
+  </div>
 
-            <div className="bg-white rounded-xl shadow-lg p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-600">Rejected</p>
-                  <p className="text-2xl font-bold text-red-600">{worksByStatus.rejected.length}</p>
-                </div>
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                  <XCircle className="w-6 h-6 text-red-600" />
-                </div>
-              </div>
-            </div>
-          </div>
+  {/* Rejected Card */}
+  <div className="bg-white rounded-xl shadow-lg p-4">
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-xs md:text-sm text-gray-600">Rejected</p>
+        <p className="text-xl md:text-2xl font-bold text-red-600">{worksByStatus.rejected.length}</p>
+      </div>
+      <div className="w-10 h-10 md:w-12 md:h-12 bg-red-100 rounded-lg flex items-center justify-center">
+        <XCircle className="w-5 h-5 md:w-6 md:h-6 text-red-600" />
+      </div>
+    </div>
+  </div>
+</div>
 
           {/* Tab Navigation */}
           <div className="bg-white rounded-xl shadow-lg mb-8">
@@ -337,14 +347,14 @@ const MyWorksPage = () => {
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center py-4 px-2 border-b-2 font-medium text-sm transition-colors whitespace-nowrap ${activeTab === tab.id
-                        ? 'border-orange-600 text-orange-600'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      ? 'border-orange-600 text-orange-600'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                       }`}
                   >
                     {tab.label}
                     <span className={`ml-2 px-2 py-1 rounded-full text-xs ${activeTab === tab.id
-                        ? 'bg-orange-100 text-orange-600'
-                        : 'bg-gray-100 text-gray-600'
+                      ? 'bg-orange-100 text-orange-600'
+                      : 'bg-gray-100 text-gray-600'
                       }`}>
                       {tab.count}
                     </span>

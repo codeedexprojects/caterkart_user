@@ -19,21 +19,21 @@ const UserStatsSection = ({ userProfile }) => {
               <Award className="w-6 h-6 text-yellow-300" />
             </div>
             <div className="text-2xl font-bold">{userProfile.completedJobs}</div>
-            <div className="text-orange-100 text-sm">Completed Jobs</div>
+            <div className="text-orange-100 text-sm">Accepted Requests</div>
           </div>
           <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center">
             <div className="flex items-center justify-center mb-2">
               <TrendingUp className="w-6 h-6 text-green-300" />
             </div>
             <div className="text-2xl font-bold">{userProfile.activeRequests}</div>
-            <div className="text-orange-100 text-sm">Active Requests</div>
+            <div className="text-orange-100 text-sm">Pending Requests</div>
           </div>
           <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4 text-center">
             <div className="flex items-center justify-center mb-2">
               <ChefHat className="w-6 h-6 text-blue-300" />
             </div>
             <div className="text-2xl font-bold">{userProfile.totalJobs}</div>
-            <div className="text-orange-100 text-sm">Total Jobs</div>
+            <div className="text-orange-100 text-sm">Published Works</div>
           </div>
         </div>
       </div>

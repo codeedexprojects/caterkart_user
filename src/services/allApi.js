@@ -95,3 +95,17 @@ export const myWorks = async () => {
         console.log(error);
     }
 };
+
+export const userCounts = async () => {
+    try {
+        const token = localStorage.getItem('access_token');
+        const response = await axios.get(`${BASE_URL}${API_ENDPOINTS.USER_AUTH}/dashboard/stats/user/`,{
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   User, 
   ChefHat, 
@@ -7,17 +7,19 @@ import {
   Star
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
+import { userCounts } from '../../services/allApi';
+import avatar from '../../assets/avatar.png';
 
 const Header = () => {
   const location = useLocation();
-
-  const userProfile = {
-    name: "John Smith",
-    email: "john.smith@email.com",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+  const [userProfile, setUserProfile] = useState({
+    name: "Loading...",
+    avatar: avatar,
     rating: 4.8,
-    completedJobs: 42
-  };
+    completedJobs: 0
+  });
+  const [loading, setLoading] = useState(true);
 
   const navigationItems = [
     { icon: Home, label: "Home", path: "/" },
@@ -25,12 +27,37 @@ const Header = () => {
     { icon: User, label: "Profile", path: "/profile" }
   ];
 
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await userCounts();
+        if (response && response.data) {
+          setUserProfile({
+            ...userProfile,
+            name: response.data.user_name || "User",
+            completedJobs: response.data.accepted_requests || 0
+          });
+        } else {
+          toast.error("Failed to load profile data");
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+        toast.error("Error loading profile");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+
   const isActive = (path) => {
     return location.pathname === path;
   };
 
   return (
     <>
+      <Toaster position="top-center" />
       {/* Top header */}
       <header className="bg-white shadow-lg border-b border-gray-100 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,7 +105,9 @@ const Header = () => {
                   className="w-8 h-8 rounded-full border-2 border-orange-200"
                 />
                 <div className="text-left">
-                  <p className="text-sm font-medium text-gray-800">{userProfile.name}</p>
+                  <p className="text-sm font-medium text-gray-800">
+                    {loading ? "Loading..." : userProfile.name}
+                  </p>
                   
                 </div>
               </Link>
@@ -98,7 +127,7 @@ const Header = () => {
                 ? 'text-orange-600'
                 : 'text-gray-500 hover:text-orange-600'
             }`}
-          >
+            >
             <item.icon className="w-5 h-5 mb-1" />
             {item.label}
           </Link>

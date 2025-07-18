@@ -20,6 +20,7 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import { getProfile, updateProfile } from '../services/allApi';
 import { useNavigate } from 'react-router-dom';
+import avatar from '../assets/avatar.png';
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -178,7 +179,7 @@ const Profile = () => {
               <div className="flex flex-col md:flex-row items-start md:items-end -mt-16 relative z-10">
                 <div className="relative">
                   <img
-                    src={profileData.profile_image || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face"}
+                    src={avatar}
                     alt="Profile"
                     className="w-32 h-32 rounded-2xl border-4 border-white shadow-lg"
                   />
@@ -418,7 +419,7 @@ const Profile = () => {
                         value={formData.user_id}
                         onChange={handleInputChange}
                         className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-600 focus:border-transparent"
-                        required
+                        disabled
                       />
                     </div>
                     

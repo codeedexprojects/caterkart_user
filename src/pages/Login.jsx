@@ -5,7 +5,8 @@ import {
   Eye, 
   EyeOff, 
   ChefHat, 
-  ArrowRight
+  ArrowRight,
+  Phone
 } from 'lucide-react';
 import { userLogin } from '../services/allApi';
 import { useNavigate } from 'react-router-dom';
@@ -94,17 +95,17 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Mobile Number
+                Mobile Number or UserID
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
                   name="identifier"
                   value={formData.identifier}
                   onChange={handleInputChange}
                   className="w-full border-2 border-gray-200 rounded-xl py-3 pl-12 pr-4 focus:border-orange-500 focus:outline-none transition-colors"
-                  placeholder="Enter your mobile number"
+                  placeholder="Enter your mobile number or UserID"
                   required
                 />
               </div>
@@ -136,18 +137,7 @@ const Login = () => {
             </div>
 
             {/* Remember Me / Forgot Password */}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input
-                  type="checkbox"
-                  className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
-                />
-                <span className="ml-2 text-sm text-gray-600">Remember me</span>
-              </label>
-              <button type="button" className="text-sm text-orange-600 hover:text-orange-700 font-medium">
-                Forgot Password?
-              </button>
-            </div>
+            
 
             {error && (
               <p className="text-red-500 text-sm">{error}</p>

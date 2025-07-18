@@ -6,21 +6,15 @@ import Footer from '../components/common/Footer';
 import UserStatsSection from '../components/Home/UserStats';
 import AvailableWorkSection from '../components/Home/AvailableWorks';
 import CompletedWorkSection from '../components/Home/CompletedWork';
-import { getWorkList, requestWork } from '../services/allApi';
+import { getWorkList, requestWork, userCounts } from '../services/allApi';
 import ConfirmationModal from '../components/common/ConfirnationModal';
 
 const CaterKartHomePage = () => {
   const navigate = useNavigate();
   const [availableWork, setAvailableWork] = useState([]);
+  const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const userProfile = {
-    name: "John Smith",
-    totalJobs: 47,
-    rating: 4.8,
-    completedJobs: 42,
-    activeRequests: 3,
-  };
+  const [profileLoading, setProfileLoading] = useState(true);
 
   const recentCompletedWork = [
     {
@@ -47,28 +41,43 @@ const CaterKartHomePage = () => {
   ];
 
   useEffect(() => {
-    const fetchAvailableWork = async () => {
+    const fetchData = async () => {
       try {
-        const response = await getWorkList();
-        if (response && response.data) {
-          setAvailableWork(response.data);
+        // Fetch user profile data
+        const profileResponse = await userCounts();
+        if (profileResponse && profileResponse.data) {
+          setUserProfile({
+            name: profileResponse.data.user_name,
+            totalJobs: profileResponse.data.published_work_count,
+            completedJobs: profileResponse.data.accepted_requests,
+            activeRequests: profileResponse.data.pending_requests,
+            
+          });
         } else {
-          console.error("No data returned");
+          toast.error("Failed to load profile data");
+        }
+
+        // Fetch available work
+        const workResponse = await getWorkList();
+        if (workResponse && workResponse.data) {
+          setAvailableWork(workResponse.data);
+        } else {
           toast.error("Failed to load available work");
         }
       } catch (error) {
-        console.error("Error fetching work list:", error);
-        toast.error("Error loading available work");
+        console.error("Error fetching data:", error);
+        toast.error("Error loading data");
       } finally {
         setLoading(false);
+        setProfileLoading(false);
       }
     };
 
-    fetchAvailableWork();
+    fetchData();
   }, []);
 
   const handleRequestWork = () => {
-    
+    // Your request work logic
   };
 
   const handleCardClick = (workId) => {
@@ -80,11 +89,21 @@ const CaterKartHomePage = () => {
       <Header />
       <Toaster position="top-center" />
       <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-red-50">
-        <UserStatsSection userProfile={userProfile} />
+        {profileLoading ? (
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p className="text-gray-600">Loading profile...</p>
+          </div>
+        ) : (
+          <UserStatsSection userProfile={userProfile} />
+        )}
 
         <div className="max-w-6xl mx-auto px-6">
           {loading ? (
-            <p className="text-center text-gray-600">Loading available work...</p>
+            <div className="flex flex-col items-center justify-center py-12">
+              <div className="w-10 h-10 border-4 border-orange-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+              <p className="text-gray-600">Loading available work...</p>
+            </div>
           ) : (
             <AvailableWorkSection
               availableWork={availableWork}
@@ -93,12 +112,10 @@ const CaterKartHomePage = () => {
             />
           )}
 
-          {/* <CompletedWorkSection recentCompletedWork={recentCompletedWork} /> */}
+         
         </div>
       </div>
       <Footer />
-
-      
     </div>
   );
 };
