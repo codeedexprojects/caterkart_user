@@ -4,6 +4,7 @@ import Profile from './pages/Profile';
 import MyWorksPage from './pages/MyWorks';
 import CateringJobDetails from './pages/WorkDetails';
 import Login from './pages/Login';
+import LandingHome from './LandingPage/Pages/Home';
 
 function App() {
   const RequireAuth = ({ children }) => {
@@ -18,6 +19,9 @@ function App() {
     <>
       <Routes>
         <Route path="/login" element={<Login />} />
+
+                <Route path="/landing" element={<LandingHome />} />
+
 
         <Route
           path="/"
